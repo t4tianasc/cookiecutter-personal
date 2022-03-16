@@ -1,14 +1,16 @@
 import os
-import subprocess
+import sys
 
+project_slug = "{{ cookiecutter.project_slug }}"
+
+ERROR_COLOR = "\x1b[31m"
 MESSAGE_COLOR = "\x1b[34m"
 RESET_ALL = "\x1b[0m"
 
-print(f"{MESSAGE_COLOR}Almost done!")
-print(f"Initializing a git repository...{RESET_ALL}")
+if project_slug.startswith("x"):
+   print(f"{ERROR_COLOR}ERROR: {project_slug=} is not a valid name for this template.{RESET_ALL}")
 
-subprocess.call(['git', 'init'])
-subprocess.call(['git', 'add', '*'])
-subprocess.call(['git', 'commit', '-m', 'add initial commit'])
+   sys.exit(1)
 
-print(f"{MESSAGE_COLOR}The beginning of your destiny is defined now! Create and have fun!{RESET_ALL}")
+print(f"{MESSAGE_COLOR}Let's do it! You're are going to create something awesome!")
+print(f"Creating project at { os.getcwd() }{RESET_ALL}")
